@@ -12,8 +12,13 @@ public class MobilePhone {
     }
 
     public boolean addNewContact(Contact contact) {
-        boolean exist = !myContacts.stream().anyMatch(contact1 -> contact1.getName().equals(contact.getName()));
-        return exist;
+        for(int i = 0;i<myContacts.size();i++) {
+            if(myContacts.get(i).getName().equals(contact.getName())) {
+                return false;
+            }
+        }
+        myContacts.add(contact);
+        return true;
     }
 
     public boolean updateContact(Contact old, Contact newContact) {
@@ -25,10 +30,43 @@ public class MobilePhone {
     }
 
     public boolean removeContact(Contact contact) {
-        return myContacts.stream().anyMatch(contact1 -> contact1.getName().equals(contact.getName()));
+        if(findContact(contact)!=-1){
+            return true;
+        }
+        return false;
     }
 
-    public int findContact(Contact contact) {
-        return myContacts.indexOf()
+    private int findContact(Contact contact) {
+        for(int i = 0;i<myContacts.size();i++) {
+            if(myContacts.get(i).getName() == contact.getName()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int findContact(String name) {
+        for(int i=0;i<myContacts.size();i++) {
+            if(myContacts.get(i).getName() == name) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    public Contact queryContact(String name) {
+        for(int i=0;i<myContacts.size();i++) {
+            if(myContacts.get(i).getName() == name) {
+                return myContacts.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void printContacts() {
+        System.out.println("Contact List:");
+        for(int i =0;i<myContacts.size();i++) {
+            Contact x = myContacts.get(i);
+            System.out.println(i+". "+x.getName()+" -> "+x.getPhoneNumber());
+        }
     }
 }
