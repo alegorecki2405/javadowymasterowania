@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        Player tim = new Player("Tim",10,15);
-        System.out.println(tim);
+
     }
 }
